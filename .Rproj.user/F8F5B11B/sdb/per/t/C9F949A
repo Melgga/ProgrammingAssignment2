@@ -1,0 +1,16 @@
+{
+    "contents" : "## The 2 functions compute the inverse of a squared matrix, if the inverse was\n## already computed, then the cached value is reported\n\n## Generates a vector of 4 functions that manage the information\nmakeCacheMatrix <- function(x = matrix()) {\n  m <- NULL\n  set <- function(y) {\n    x <<- y\n    m <<- NULL\n  }\n  get <- function() x\n  setinverse <- function(inv) m <<- inv\n  getinverse <- function() m\n  list(set = set, get = get,\n       setinverse = setinverse,\n       getinverse = getinverse)\n}\n\n\n## uses the 4 functions to compute the inverse or report the cached value\ncacheSolve <- function(x, ...) {\n        ## Return a matrix that is the inverse of 'x'\n  m <- x$getinverse()\n  if(!is.null(m)) {\n    message(\"getting cached data\")\n    return(m)\n  }\n  data <- x$get()\n  m <- solve(data, ...)\n  x$setinverse(m)\n  m\n}\n\n##commands for testing\na<-matrix(c(0,1,2,4),2,2)\nl4functions<-makeCacheMatrix(a)\ncacheSolve(l4functions) #computes inverse of a\ncacheSolve(l4functions) #now gives the cached inverse of a\n\nb<-matrix(c(2,0,0,.25),2,2)\nl4functions$set(b)  #assigns b to the 4 functions\ncacheSolve(l4functions) #computes inverse of b\ncacheSolve(l4functions) #now gives the cached inverse of b\n\n\n",
+    "created" : 1398455734954.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "779970695",
+    "id" : "C9F949A",
+    "lastKnownWriteTime" : 1398458597,
+    "path" : "C:/Users/Altaxapur/CacheMatrInv/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
